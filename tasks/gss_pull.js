@@ -135,16 +135,26 @@ module.exports = function(grunt) {
             Promise.all( promises ).then(function(results) {
             // Write the destination file.
                 if (results.length === 1) {
-                    grunt.file.write(fileObj.dest, JSON.stringify(results[0])
-                    );
+                    if(options.preamble) {
+                        grunt.file.write(fileObj.dest, options.preamble + JSON.stringify(results[0])
+                        );
+                    } else {
+                        grunt.file.write(fileObj.dest, JSON.stringify(results[0])
+                        );
+                    }
                 } else {
                     var object_to_write = {};
                     for (var i=0; i < results.length; i++) {
                         var key = Object.keys(results[i])[0];
                         object_to_write[key] = results[i][key];
                     }
-                    grunt.file.write(fileObj.dest, JSON.stringify(object_to_write)
-                    );
+                    if(options.preamble) {
+                        grunt.file.write(fileObj.dest, options.preamble + JSON.stringify(object_to_write)
+                        );
+                    } else {
+                        grunt.file.write(fileObj.dest, JSON.stringify(object_to_write)
+                        );
+                    }
                 }
 
                 // Print a success message.

@@ -61,9 +61,7 @@ module.exports = function(grunt) {
 
         var fetch_each_sheet = function(sheet, key) {
             var promise = new Promise.Promise();
-            var sheet_id = sheet.link[3].href.substr( 
-                sheet.link[3].href.length - 3, 3
-            );
+            var sheet_id = sheet.link[3].href.match("gid=([^&]*)")[1];
             var url = "https://spreadsheets.google.com/feeds/list/" + key + "/" + sheet_id + "/public/values?alt=json";
             http.get(url, function(res) {
                 var response_data = '';

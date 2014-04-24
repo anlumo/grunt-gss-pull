@@ -7,7 +7,7 @@
  */
 
 'use strict';
-var http = require('http');
+var http = require('https');
 var Promise = require('node-promise');
 
 module.exports = function(grunt) {
@@ -64,7 +64,7 @@ module.exports = function(grunt) {
             var sheet_id = sheet.link[3].href.substr( 
                 sheet.link[3].href.length - 3, 3
             );
-            var url = "http://spreadsheets.google.com/feeds/list/" + key + "/" + sheet_id + "/public/values?alt=json";
+            var url = "https://spreadsheets.google.com/feeds/list/" + key + "/" + sheet_id + "/public/values?alt=json";
             http.get(url, function(res) {
                 var response_data = '';
                 res.on('error', function(e) {
@@ -126,7 +126,7 @@ module.exports = function(grunt) {
                 if (!spreadsheetKey) {
                     grunt.log.error('Could not find spreadsheet key from "' + fileObj.src );
                 }
-                var json_url = "http://spreadsheets.google.com/feeds/worksheets/"
+                var json_url = "https://spreadsheets.google.com/feeds/worksheets/"
                 + spreadsheetKey + "/public/basic?alt=json";
 
                 var promise = gss_fetch( json_url, spreadsheetKey);
